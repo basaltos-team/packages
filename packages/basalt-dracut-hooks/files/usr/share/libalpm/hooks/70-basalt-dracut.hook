@@ -1,0 +1,2 @@
+# Placeholder ALPM hook. Final hook must run after DKMS and before bootloader updates.
+

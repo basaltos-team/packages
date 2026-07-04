@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+echo "TODO: build all packages in a clean environment"
+
