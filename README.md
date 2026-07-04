@@ -1,4 +1,4 @@
-# basalt-packages
+# packages
 
 Packaging repository for BasaltOS pacman packages.
 
@@ -8,7 +8,7 @@ Packaging repository for BasaltOS pacman packages.
 - Package QA policy.
 - Clean chroot build scripts.
 - Package signing inputs.
-- Package promotion metadata before it is handed to `basalt-repo/`.
+- Package promotion metadata before it is handed to `repo-manifests/`.
 
 ## Planned Packages
 
@@ -22,7 +22,7 @@ Packaging repository for BasaltOS pacman packages.
 ## Planned Layout
 
 ```text
-basalt-packages/
+packages/
 |-- packages/
 |   |-- basalt/
 |   |   |-- PKGBUILD
@@ -57,4 +57,4 @@ basalt-packages/
 
 - Consumes versioned Basalt release artifacts from `basalt/`.
 - Emits signed `*.pkg.tar.zst` packages and build logs.
-- Does not hand-edit published repo metadata. That is owned by `basalt-repo/`.
+- Does not hand-edit published repo metadata. That is owned by `repo-manifests/`.
