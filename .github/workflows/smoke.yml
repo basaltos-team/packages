@@ -1,0 +1,19 @@
+name: smoke
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  package-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check package shell syntax
+        run: |
+          set -eu
+          bash -n packages/*/PKGBUILD
+          find packages -type f -name '*.install' -exec bash -n {} +
+          find scripts -type f ! -name '.gitkeep' -exec bash -n {} +
+          find tests -type f -name '*.sh' -exec bash -n {} +
