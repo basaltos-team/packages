@@ -58,3 +58,14 @@ packages/
 - Consumes versioned Basalt release artifacts from `basalt/`.
 - Emits signed `*.pkg.tar.zst` packages and build logs.
 - Does not hand-edit published repo metadata. That is owned by `repo-manifests/`.
+
+## Validation
+
+Run syntax checks before package behavior exists:
+
+```sh
+bash -n packages/*/PKGBUILD
+find packages -type f -name '*.install' -exec bash -n {} +
+find scripts -type f ! -name '.gitkeep' -exec bash -n {} +
+find tests -type f -name '*.sh' -exec bash -n {} +
+```
