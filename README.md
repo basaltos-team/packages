@@ -79,3 +79,17 @@ On Arch or in the Basalt Arch VM, build the first local package artifacts with:
 ```
 
 Generated packages are copied to `artifacts/`.
+
+Generate local pacman repository metadata with:
+
+```sh
+./scripts/generate-repo
+```
+
+The local repo is written to `repo/x86_64/`.
+
+For a direct `file://` pacman install test, write the repo to a world-readable path:
+
+```sh
+BASALT_PACKAGE_REPO_DIR=/tmp/basalt-local-repo ./scripts/generate-repo
+```

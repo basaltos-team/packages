@@ -1,3 +1,28 @@
 #!/usr/bin/env sh
-echo "TODO: generate staging repository metadata"
+set -eu
 
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+REPO_ROOT="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)"
+ARTIFACT_DIR="${BASALT_PACKAGE_ARTIFACT_DIR:-$REPO_ROOT/artifacts}"
+REPO_DIR="${BASALT_PACKAGE_REPO_DIR:-$REPO_ROOT/repo/x86_64}"
+DB_PATH="$REPO_DIR/basalt.db.tar.gz"
+
+command -v repo-add >/dev/null 2>&1 || {
+  printf 'repo-add is required; run this on Arch or in the Arch VM\n' >&2
+  exit 1
+}
+
+mkdir -p "$REPO_DIR"
+
+set -- "$ARTIFACT_DIR"/*.pkg.tar.*
+if [ ! -e "$1" ]; then
+  printf 'no package artifacts found in %s\n' "$ARTIFACT_DIR" >&2
+  exit 1
+fi
+
+find "$REPO_DIR" -maxdepth 1 -type f -name '*.pkg.tar.*' -delete
+cp "$ARTIFACT_DIR"/*.pkg.tar.* "$REPO_DIR/"
+
+repo-add "$DB_PATH" "$REPO_DIR"/*.pkg.tar.*
+
+printf 'repository metadata written to %s\n' "$REPO_DIR"
