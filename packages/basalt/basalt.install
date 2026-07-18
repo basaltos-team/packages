@@ -1,2 +1,7 @@
-# Placeholder install script for basalt package lifecycle hooks.
+post_install() {
+  echo "Basalt CLI installed. Run 'basalt doctor' to inspect local readiness."
+}
 
+post_upgrade() {
+  post_install
+}

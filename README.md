@@ -69,3 +69,13 @@ find packages -type f -name '*.install' -exec bash -n {} +
 find scripts -type f ! -name '.gitkeep' -exec bash -n {} +
 find tests -type f -name '*.sh' -exec bash -n {} +
 ```
+
+## Build Artifacts
+
+On Arch or in the Basalt Arch VM, build the first local package artifacts with:
+
+```sh
+./scripts/build-all
+```
+
+Generated packages are copied to `artifacts/`.

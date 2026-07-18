@@ -1,3 +1,52 @@
 #!/usr/bin/env sh
-echo "TODO: build one package in a clean environment"
+set -eu
 
+PACKAGE="${1:-}"
+[ -n "$PACKAGE" ] || {
+  printf 'usage: %s <package>\n' "$0" >&2
+  exit 2
+}
+
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+REPO_ROOT="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)"
+WORKSPACE_ROOT="$(CDPATH= cd -- "$REPO_ROOT/.." && pwd)"
+PKG_DIR="$REPO_ROOT/packages/$PACKAGE"
+ARTIFACT_DIR="$REPO_ROOT/artifacts"
+
+[ -f "$PKG_DIR/PKGBUILD" ] || {
+  printf 'package not found: %s\n' "$PACKAGE" >&2
+  exit 1
+}
+
+command -v makepkg >/dev/null 2>&1 || {
+  printf 'makepkg is required; run this on Arch or in the Arch VM\n' >&2
+  exit 1
+}
+
+mkdir -p "$ARTIFACT_DIR"
+
+case "$PACKAGE" in
+  basalt)
+    command -v cargo >/dev/null 2>&1 || {
+      printf 'cargo is required to build the basalt binary\n' >&2
+      exit 1
+    }
+    (
+      cd "$WORKSPACE_ROOT/core"
+      cargo build --release
+    )
+    cp "$WORKSPACE_ROOT/core/target/release/basalt" "$PKG_DIR/basalt"
+    ;;
+esac
+
+(
+  cd "$PKG_DIR"
+  if [ "$PACKAGE" = "basalt-base" ]; then
+    makepkg -f --noconfirm --nodeps
+  else
+    makepkg -f --noconfirm
+  fi
+  find . -maxdepth 1 -type f -name '*.pkg.tar.*' -exec cp {} "$ARTIFACT_DIR/" \;
+)
+
+printf 'package artifacts written to %s\n' "$ARTIFACT_DIR"

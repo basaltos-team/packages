@@ -1,2 +1,13 @@
-# Placeholder PKGBUILD for basalt-base.
+pkgname=basalt-base
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Minimal BasaltOS base package set"
+arch=('any')
+url="https://github.com/basaltos-team/packages"
+license=('MIT')
+depends=('basalt')
+options=('!debug')
 
+package() {
+  install -Dm644 /dev/null "$pkgdir/usr/share/basalt-base/.keep"
+}

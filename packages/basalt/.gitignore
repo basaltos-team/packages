@@ -1,0 +1,5 @@
+basalt
+pkg/
+src/
+*.pkg.tar.*
+*.pkg.tar.*.sig

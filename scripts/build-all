@@ -1,3 +1,7 @@
 #!/usr/bin/env sh
-echo "TODO: build all packages in a clean environment"
+set -eu
 
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+
+"$SCRIPT_DIR/build-one" basalt
+"$SCRIPT_DIR/build-one" basalt-base

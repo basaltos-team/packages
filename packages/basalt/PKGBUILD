@@ -1,2 +1,16 @@
-# Placeholder PKGBUILD for the basalt CLI package.
+pkgname=basalt
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="BasaltOS configuration and apply CLI"
+arch=('x86_64')
+url="https://github.com/basaltos-team/core"
+license=('MIT')
+depends=('gcc-libs')
+install=basalt.install
+source=('basalt')
+sha256sums=('SKIP')
+options=('!debug')
 
+package() {
+  install -Dm755 "$srcdir/basalt" "$pkgdir/usr/bin/basalt"
+}
