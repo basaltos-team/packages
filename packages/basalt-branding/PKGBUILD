@@ -1,2 +1,20 @@
-# Placeholder PKGBUILD for basalt-branding.
+pkgname=basalt-branding
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="BasaltOS text identity and console branding templates"
+arch=('any')
+url="https://github.com/basaltos-team/packages"
+license=('MIT')
+source=(
+  'os-release::files/usr/share/basalt/branding/os-release'
+  'issue::files/usr/share/basalt/branding/issue'
+  'name::files/usr/share/basalt/branding/name'
+)
+sha256sums=('SKIP' 'SKIP' 'SKIP')
+options=('!debug')
 
+package() {
+  install -Dm644 "$srcdir/os-release" "$pkgdir/usr/share/basalt/branding/os-release"
+  install -Dm644 "$srcdir/issue" "$pkgdir/usr/share/basalt/branding/issue"
+  install -Dm644 "$srcdir/name" "$pkgdir/usr/share/basalt/branding/name"
+}

@@ -1,0 +1,7 @@
+NAME="BasaltOS"
+ID=basalt
+ID_LIKE=arch
+PRETTY_NAME="BasaltOS"
+HOME_URL="https://github.com/basaltos-team"
+SUPPORT_URL="https://github.com/basaltos-team"
+BUG_REPORT_URL="https://github.com/basaltos-team"
