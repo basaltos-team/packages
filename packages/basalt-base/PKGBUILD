@@ -5,7 +5,7 @@ pkgdesc="Minimal BasaltOS base package set"
 arch=('any')
 url="https://github.com/basaltos-team/packages"
 license=('MIT')
-depends=('base' 'basalt' 'basalt-branding')
+depends=('base' 'basalt' 'basalt-branding' 'sudo')
 options=('!debug')
 
 package() {
