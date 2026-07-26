@@ -1,0 +1,10 @@
+## BasaltOS pacman repository mirrors
+##
+## The public hosting contract is provider-neutral until infrastructure chooses
+## the backing service. Keep these URLs aligned with infra/repo-hosting.
+
+## Stable channel
+Server = https://repo.basaltos.org/stable/$arch
+
+## Staging channel
+# Server = https://repo.basaltos.org/staging/$arch

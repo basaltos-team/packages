@@ -1,2 +1,13 @@
-# Placeholder PKGBUILD for basalt-mirrorlist.
+pkgname=basalt-mirrorlist
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="BasaltOS pacman repository mirrorlist"
+arch=('any')
+url="https://repo.basaltos.org"
+license=('MIT')
+backup=('etc/pacman.d/basalt-mirrorlist')
+options=('!debug')
 
+package() {
+  install -Dm644 "$srcdir/basalt-mirrorlist" "$pkgdir/etc/pacman.d/basalt-mirrorlist"
+}

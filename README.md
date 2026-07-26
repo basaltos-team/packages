@@ -33,6 +33,7 @@ packages/
 |   |   `-- files/usr/share/libalpm/hooks/70-basalt-dracut.hook
 |   |-- basalt-keyring/
 |   `-- basalt-mirrorlist/
+|       `-- basalt-mirrorlist
 |-- policy/
 |   |-- package-naming.md
 |   |-- signing.md
@@ -68,6 +69,7 @@ bash -n packages/*/PKGBUILD
 find packages -type f -name '*.install' -exec bash -n {} +
 find scripts -type f ! -name '.gitkeep' -exec bash -n {} +
 find tests -type f -name '*.sh' -exec bash -n {} +
+tests/mirrorlist-contract.sh
 ```
 
 ## Build Artifacts
