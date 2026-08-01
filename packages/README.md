@@ -10,4 +10,5 @@ Initial packages:
 - `basalt-keyring`: pacman signing keys.
 - `basalt-dracut-hooks`: ALPM hooks for dracut rebuilds.
 - `basalt-mirrorlist`: repository mirror configuration.
-
+- `calamares`: upstream installer framework package used by the opt-in
+  graphical ISO profile.

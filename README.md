@@ -18,6 +18,7 @@ Packaging repository for BasaltOS pacman packages.
 - `basalt-dracut-hooks`
 - `basalt-keyring`
 - `basalt-mirrorlist`
+- `calamares` (opt-in graphical ISO dependency)
 
 ## Planned Layout
 
@@ -32,8 +33,10 @@ packages/
 |   |-- basalt-dracut-hooks/
 |   |   `-- files/usr/share/libalpm/hooks/70-basalt-dracut.hook
 |   |-- basalt-keyring/
-|   `-- basalt-mirrorlist/
-|       `-- basalt-mirrorlist
+|   |-- basalt-mirrorlist/
+|   |   `-- basalt-mirrorlist
+|   `-- calamares/
+|       `-- PKGBUILD
 |-- policy/
 |   |-- package-naming.md
 |   |-- signing.md
@@ -78,6 +81,12 @@ On Arch or in the Basalt Arch VM, build the first local package artifacts with:
 
 ```sh
 ./scripts/build-all
+```
+
+Build the opt-in Calamares package for graphical ISO work with:
+
+```sh
+./scripts/build-one calamares
 ```
 
 Generated packages are copied to `artifacts/`.

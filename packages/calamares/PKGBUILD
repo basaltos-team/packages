@@ -1,0 +1,63 @@
+pkgname=calamares
+pkgver=3.3.14
+pkgrel=1
+pkgdesc="Distribution-independent installer framework"
+arch=('x86_64')
+url="https://calamares.io"
+license=('GPL-3.0-or-later')
+depends=(
+  'boost-libs'
+  'kconfig'
+  'kcoreaddons'
+  'ki18n'
+  'kpmcore'
+  'kparts'
+  'kservice'
+  'kwidgetsaddons'
+  'polkit-qt6'
+  'python'
+  'python-yaml'
+  'qt6-base'
+  'qt6-declarative'
+  'qt6-svg'
+  'solid'
+  'yaml-cpp'
+)
+makedepends=(
+  'boost'
+  'cmake'
+  'extra-cmake-modules'
+  'gettext'
+  'git'
+  'kcrash'
+  'ninja'
+  'pybind11'
+  'qt6-tools'
+)
+optdepends=(
+  'kpmcore: partitioning module support'
+  'qt6-webengine: webview module support'
+)
+source=("git+https://github.com/calamares/calamares.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+options=('!debug')
+
+build() {
+  cmake -S "$srcdir/calamares" -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DWITH_QT6=ON \
+    -DWITH_PYTHON=ON \
+    -DWITH_PYBIND11=ON \
+    -DINSTALL_CONFIG=OFF \
+    -DINSTALL_COMPLETION=OFF \
+    -DINSTALL_POLKIT=ON \
+    -DBUILD_CRASH_REPORTING=OFF \
+    -DBUILD_SCHEMA_TESTING=OFF \
+    -DBUILD_TESTING=OFF
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}
